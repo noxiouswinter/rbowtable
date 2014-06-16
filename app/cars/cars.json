@@ -1,0 +1,24 @@
+[
+    {
+        "age": 0,
+        "id": "mclaren-p1",
+        "imageUrl": "img/cars/mclaren-p1.jpg",
+        "name": "Mclaren P1",
+        "snippet": "Most technologically advanced car yet."
+    },
+    {
+        "age": 1,
+        "id": "ferrari-528-italia",
+        "imageUrl": "img/cars/Ferrari-458-Italia.jpg",
+        "name": "Ferrari 528 Italia",
+        "snippet": "Best of Ferrari."
+    },
+    {
+        "age": 2,
+        "id": "bugati-veyron-supersport",
+        "imageUrl": "img/cars/bugati-veyron-supersport.jpg",
+        "name": "Bugati Veyron Supersport",
+        "snippet": "Fastest production car in the world!"
+    }
+]
+

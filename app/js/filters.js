@@ -2,9 +2,10 @@
 
 /* Filters */
 
-angular.module('myApp.filters', []).
-  filter('interpolate', ['version', function(version) {
+var filters = angular.module('myApp.filters', []);
+
+filters.filter('myFilter', function(version) {
     return function(text) {
-      return String(text).replace(/\%VERSION\%/mg, version);
+      return String(text + " Some extra content from myFilter" );
     };
-  }]);
+  });

@@ -1,0 +1,9 @@
+<p>This is the Car List Partial.</p>
+
+<ul>
+  <li ng-repeat="car in cars">
+    <p><a href="#/cars/{{car.id}}"><img ng-src="{{car.imageUrl}}"></a></p>
+    <p><a href="#/cars/{{car.id}}">{{car.name}}</a></p>
+    <p>{{car.snippet}}</p>
+  </li>
+</ul>
