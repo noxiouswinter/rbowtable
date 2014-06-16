@@ -2,10 +2,13 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', [])
-  .controller('MyCtrl1', ['$scope', function($scope) {
+var controllers = angular.module('myApp.controllers', []);
+controllers.controller('CarListController', ['$scope', 'Car', function($scope, Car){
+        $scope.cars = Car.query();
+}]);
 
-  }])
-  .controller('MyCtrl2', ['$scope', function($scope) {
-
-  }]);
+controllers.controller('CarDetailController', ['$scope', '$routeParams', 'Car',
+    function($scope, $routeParams, Car){
+      $scope.car = Car.get({carId: $routeParams.carId}, function(car) {
+      });
+    }]);
