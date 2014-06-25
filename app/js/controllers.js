@@ -293,7 +293,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             var rowHeaderHeight = (rowHeaderBoxHeight + padding) * numberOfRows;
 
             //Column Header
-            var columnHeaderBoxWidth = 150;
+            var columnHeaderBoxWidth = 180;
             var columnHeaderBoxHeight = 150;
             var columnHeaderBoxContentWidth = columnHeaderBoxWidth;
             var columnHeaderBoxContentHeight = 125;
