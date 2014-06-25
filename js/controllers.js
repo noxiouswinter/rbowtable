@@ -10,129 +10,133 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
         var cachedCarsModel = null;
         var sortOrderToggle = true;
         
-        Car.getAll(function(carsModel) {
+        $scope.loadData = function() {
+            Car.getAll(function(carsModel) {
             cachedCarsModel = carsModel;
             $scope.tableModel = getDefaultTableModel(cachedCarsModel);
             //Refresh Positions
-            $scope.positionElements();
+            positionElements();
          });
+        };
+        
+        $scope.loadData();
          
-         var getDefaultTableModel = function(carsModel) {
-             
-            var tempTableModel = {"columnHeaderIds": [], "rowHeaderIds": [], "columnHeader" : [], "rowHeader" : [], "specsData": []};
-            
-            copyHeaderIds(tempTableModel, carsModel);
-            populateColumnHeaderDataOrderedByColumnHeaderIds(tempTableModel, carsModel);
-            populateRowHeaderDataOrderedByRowHeaderIds(tempTableModel, carsModel);
-            populateSpecsDataOrderedByColumnHeaderIdsAndRowHeaderIds(tempTableModel, carsModel);
-            
-            return tempTableModel;
-         }
-         
-         var copyHeaderIds = function(tableModel, carsModel) {
-             
+        var getDefaultTableModel = function(carsModel) {
+
+           var tempTableModel = {"columnHeaderIds": [], "rowHeaderIds": [], "columnHeader" : [], "rowHeader" : [], "specsData": []};
+
+           copyHeaderIds(tempTableModel, carsModel);
+           populateColumnHeaderDataOrderedByColumnHeaderIds(tempTableModel, carsModel);
+           populateRowHeaderDataOrderedByRowHeaderIds(tempTableModel, carsModel);
+           populateSpecsDataOrderedByColumnHeaderIdsAndRowHeaderIds(tempTableModel, carsModel);
+
+           return tempTableModel;
+        }
+
+        var copyHeaderIds = function(tableModel, carsModel) {
+
+           //Get the cars array
+           var cars = carsModel.cars;
+
+           //Get the specs array
+           var specs = cars[0].specs;
+
+           //Populate columnHeaderIds
+           for(var i = 0; i < cars.length; i++) {
+               var car = cars[i];
+               tableModel.columnHeaderIds.push(car.id);
+           }
+
+           //Populate rowHeaderIds
+           for (var i = 0; i < specs.length; i++) {
+               var spec = specs[i];
+               tableModel.rowHeaderIds.push(spec.id);
+           }
+        };
+
+        var populateColumnHeaderDataOrderedByColumnHeaderIds = function(tableModel, carsModel) {
+
+            //Reset array
+            tableModel.columnHeader = [];
+
             //Get the cars array
-            var cars = carsModel.cars;
-            
-            //Get the specs array
-            var specs = cars[0].specs;
-            
-            //Populate columnHeaderIds
-            for(var i = 0; i < cars.length; i++) {
-                var car = cars[i];
-                tableModel.columnHeaderIds.push(car.id);
-            }
-            
-            //Populate rowHeaderIds
-            for (var i = 0; i < specs.length; i++) {
-                var spec = specs[i];
-                tableModel.rowHeaderIds.push(spec.id);
-            }
-         };
-         
-         var populateColumnHeaderDataOrderedByColumnHeaderIds = function(tableModel, carsModel) {
-             
-             //Reset array
-             tableModel.columnHeader = [];
-             
-             //Get the cars array
-            var cars = carsModel.cars;
-             
-             //Populate columnHeader
-            for(var i = 0; i < tableModel.columnHeaderIds.length; i++) {
-                var carId = tableModel.columnHeaderIds[i];
-                var car = getCarById(cars, carId);
-                if(car === null) {
-                    console.log('Car with carId: ' + carId + 'could be found from carsModel');
-                    return;
-                }
-                var columnHeaderItem =  {"carId": "", "carName": ""};
-                columnHeaderItem.carId = car.id;
-                columnHeaderItem.carName = car.name;
-                columnHeaderItem.carImageUrl = car.imageUrl;
-                tableModel.columnHeader.push(columnHeaderItem);
-            }
-         };
-         
-         var populateRowHeaderDataOrderedByRowHeaderIds = function(tableModel, carsModel) {
-             
-             //Reset array
-             tableModel.rowHeader = [];
-             
-             //Get the cars array
-            var cars = carsModel.cars;
-            
-            //Get the specs array
-            var specs = cars[0].specs;
-             
-             //Populate rowHeader 
-            for(var i = 0; i < tableModel.rowHeaderIds.length; i++) {
-                var specId = tableModel.rowHeaderIds[i];
-                var spec = getSpecById(specs, specId);
-                if(spec === null) {
-                    console.log('Spec with specId: ' + specId + 'could be found from carsModel');
-                    return;
-                }
-                var rowHeaderItem = {"specId": "", "specName": ""};
-                rowHeaderItem.specId = spec.id;
-                rowHeaderItem.specName = spec.name;
-                rowHeaderItem.specUnit = spec.unit;
-                tableModel.rowHeader.push(rowHeaderItem);
-            }
-         };
-         
-         var populateSpecsDataOrderedByColumnHeaderIdsAndRowHeaderIds = function(tableModel, carsModel) {
-             
-             //Get the cars array
-            var cars = carsModel.cars;
-             
-             //Populate specsData
-            var tempTableSpecsData = [];
-            for(var i = 0; i < tableModel.columnHeaderIds.length; i++) {
-                var carId = tableModel.columnHeaderIds[i];
-                var currentCar = getCarById(cars, carId);
-                if(currentCar === null) {
-                    return;
-                }
-                
-                var tempSpecsPerCar = [];
-                for(var k = 0; k < tableModel.rowHeaderIds.length; k++) {
-                    var specId = tableModel.rowHeaderIds[k];
-                    var currentSpec;
-                    for(var l = 0; l < currentCar.specs.length; l++) {
-                        var spec = currentCar.specs[l];
-                        if(spec.id == specId) {
-                            currentSpec = spec;
-                            break;
-                        }
-                    }
-                    tempSpecsPerCar.push(currentSpec);
-                }
-                tempTableSpecsData.push(tempSpecsPerCar);
-            }
-            
-            tableModel.specsData = tempTableSpecsData;
-         };
+           var cars = carsModel.cars;
+
+            //Populate columnHeader
+           for(var i = 0; i < tableModel.columnHeaderIds.length; i++) {
+               var carId = tableModel.columnHeaderIds[i];
+               var car = getCarById(cars, carId);
+               if(car === null) {
+                   console.log('Car with carId: ' + carId + 'could be found from carsModel');
+                   return;
+               }
+               var columnHeaderItem =  {"carId": "", "carName": ""};
+               columnHeaderItem.carId = car.id;
+               columnHeaderItem.carName = car.name;
+               columnHeaderItem.carImageUrl = car.imageUrl;
+               tableModel.columnHeader.push(columnHeaderItem);
+           }
+        };
+
+        var populateRowHeaderDataOrderedByRowHeaderIds = function(tableModel, carsModel) {
+
+            //Reset array
+            tableModel.rowHeader = [];
+
+            //Get the cars array
+           var cars = carsModel.cars;
+
+           //Get the specs array
+           var specs = cars[0].specs;
+
+            //Populate rowHeader 
+           for(var i = 0; i < tableModel.rowHeaderIds.length; i++) {
+               var specId = tableModel.rowHeaderIds[i];
+               var spec = getSpecById(specs, specId);
+               if(spec === null) {
+                   console.log('Spec with specId: ' + specId + 'could be found from carsModel');
+                   return;
+               }
+               var rowHeaderItem = {"specId": "", "specName": ""};
+               rowHeaderItem.specId = spec.id;
+               rowHeaderItem.specName = spec.name;
+               rowHeaderItem.specUnit = spec.unit;
+               tableModel.rowHeader.push(rowHeaderItem);
+           }
+        };
+
+        var populateSpecsDataOrderedByColumnHeaderIdsAndRowHeaderIds = function(tableModel, carsModel) {
+
+            //Get the cars array
+           var cars = carsModel.cars;
+
+            //Populate specsData
+           var tempTableSpecsData = [];
+           for(var i = 0; i < tableModel.columnHeaderIds.length; i++) {
+               var carId = tableModel.columnHeaderIds[i];
+               var currentCar = getCarById(cars, carId);
+               if(currentCar === null) {
+                   return;
+               }
+
+               var tempSpecsPerCar = [];
+               for(var k = 0; k < tableModel.rowHeaderIds.length; k++) {
+                   var specId = tableModel.rowHeaderIds[k];
+                   var currentSpec;
+                   for(var l = 0; l < currentCar.specs.length; l++) {
+                       var spec = currentCar.specs[l];
+                       if(spec.id == specId) {
+                           currentSpec = spec;
+                           break;
+                       }
+                   }
+                   tempSpecsPerCar.push(currentSpec);
+               }
+               tempTableSpecsData.push(tempSpecsPerCar);
+           }
+
+           tableModel.specsData = tempTableSpecsData;
+        };
          
         var getCarById = function(cars, carId) {
             var currentCar = null;
@@ -269,18 +273,19 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
         
         
         
-        $scope.positionElements = function() {
+        var positionElements = function() {
 
             var Unit = 'px';
         
             var padding = 10;
+            var innerPadding = 5;
             var numberOfRows = $scope.tableModel.rowHeaderIds.length;
             var numberOfColumns = $scope.tableModel.columnHeaderIds.length;
 
             //Row Header
             var rowHeaderBoxWidth = 150;
             var rowHeaderBoxHeight = 100;
-            var rowHeaderBoxContentWidth = 100;
+            var rowHeaderBoxContentWidth = 123;
             var rowHeaderBoxContentHeight = rowHeaderBoxHeight;
             var rowHeaderBoxNavWidth = rowHeaderBoxWidth - rowHeaderBoxContentWidth - 2; //Tweak
             var rowHeaderBoxNavHeight = rowHeaderBoxHeight;
@@ -291,7 +296,9 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             var columnHeaderBoxWidth = 150;
             var columnHeaderBoxHeight = 150;
             var columnHeaderBoxContentWidth = columnHeaderBoxWidth;
-            var columnHeaderBoxContentHeight = 100;
+            var columnHeaderBoxContentHeight = 125;
+            var columnHeaderBoxContentImageWidth = columnHeaderBoxContentWidth;
+            var columnHeaderBoxContentImageHeight = columnHeaderBoxContentHeight;
             var columnHeaderBoxNavWidth = columnHeaderBoxWidth;
             var columnHeaderBoxNavHeight = columnHeaderBoxHeight - columnHeaderBoxContentHeight; 
             var columnHeaderWidth = (columnHeaderBoxWidth + padding) * numberOfColumns;
@@ -342,7 +349,8 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'position': 'relative',
                 'width': tableWidth+Unit,
                 'height': tableHeight+Unit,
-                'background-color': 'lightpink',
+                'background-color': 'white',
+                'border': '1px solid lightgrey',
                 'overflow': 'scroll'
             };
 
@@ -352,7 +360,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'top':  headNodeTop+Unit,
                 'width':headNodeWidth+Unit,
                 'height': headNodeHeight+Unit,
-                'background-color': '#9999ff'
+//                'background-color': '#9999ff'
             };
 
             $scope.rbowHeadNodeBox = {
@@ -362,23 +370,23 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
 
             $scope.rbowHeadNodeBoxContent = {
                 'float': 'left',
-                'width': '100px',
-                'height': '100px',
-                'background-color': 'silver'
+                'width': rowHeaderBoxWidth+Unit, 
+                'height': columnHeaderBoxHeight+Unit,
+                'background-color': '#F7F7F9'
             };
 
             $scope.rbowRowHeaderBoxNav = {
                 'float': 'right',
                 'width': rowHeaderBoxNavWidth+Unit,
                 'height': rowHeaderBoxNavHeight+Unit,
-                'background-color': 'tomato'
+                'background-color': 'Gainsboro '
             };
 
             $scope.rbowColumnHeaderBoxNav = {
                 'float': 'left',
                 'width': columnHeaderBoxNavWidth+Unit,
                 'height': columnHeaderBoxNavHeight+Unit,
-                'background-color': 'tomato'
+                'background-color': 'Gainsboro '
             };
 
             $scope.rbowColumnHeader = {
@@ -387,7 +395,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'top': columnHeaderTop+Unit,
                 'width': columnHeaderWidth+Unit,
                 'height': columnHeaderHeight+Unit,
-                'background-color': 'greenyellow'
+//                'background-color': 'greenyellow'
             };
 
             $scope.rbowColumnHeaderBox = {
@@ -399,7 +407,15 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'float': 'left',
                 'width': columnHeaderBoxContentWidth+Unit,
                 'height': columnHeaderBoxContentHeight+Unit,
-                'background-color': 'white'
+                'padding': innerPadding+Unit,
+                'background-color': '#F7F7F9',
+                'overflow': 'scroll'
+            };
+            
+            $scope.rbowColumnHeaderBoxContentImage = {
+                'float': 'left',
+                'width': columnHeaderBoxContentImageWidth+Unit,
+                'height': columnHeaderBoxContentImageHeight+Unit,
             };
 
             $scope.rbowRowHeader = {
@@ -408,7 +424,6 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'top':  rowHeaderTop+Unit,
                 'width': rowHeaderWidth+Unit,
                 'height': rowHeaderHeight+Unit,
-                'background-color': 'magenta'
             };
 
             $scope.rbowRowHeaderBox = {
@@ -420,7 +435,9 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'float': 'left',
                 'width': rowHeaderBoxContentWidth+Unit,
                 'height': rowHeaderBoxContentHeight+Unit,
-                'background-color': 'white'
+                'background-color': '#F7F7F9',
+                'padding': innerPadding+Unit,
+                'overflow': 'scroll'
             };
 
             $scope.rbowSpecsArea = {
@@ -429,20 +446,20 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'top': specsAreaTop+Unit,
                 'width': specsAreaWidth+Unit,
                 'height': specsAreaHeight+Unit,
-                'background-color': 'lightskyblue'
             };
 
             $scope.rbowSpecsColumn = {
                 'float': 'left',
                 'width': specsColumnWidth+Unit,
                 'height': specsColumnHeight+Unit,
-                'background-color': 'salmon'
             };
 
             $scope.rbowSpecsContent = {
                 'width': specsContentWidth+Unit,
                 'height': specsContentHeight+Unit,
-                'background-color': 'white'
+                'background-color': 'white',
+                'padding': innerPadding+Unit,
+                'overflow': 'scroll'
             }
 
         };

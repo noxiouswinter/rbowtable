@@ -9,12 +9,12 @@ and open the template in the editor.
 */
 
 .rbow-bsRow {
-    background-color: yellow;
+    background-color: #baf1e3;
 }
 
 .rbow-bsContainer {
     width: 80%;
-    background-color: orange;
+    background-color: white;
     overflow: scroll;
 }
 
@@ -22,7 +22,18 @@ and open the template in the editor.
     float:left;
     margin-top: 10px;
     margin-left: 10px;
-    border: 1px solid black;
-    overflow: scroll;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
 }
 
+/* Utils */
+.rotate-icon    {  
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform:rotate(90deg);
+    /* filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1.5); */
+    -ms-transform:rotate(90deg);
+
+}
