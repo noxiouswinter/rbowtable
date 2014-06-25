@@ -19,8 +19,11 @@
             <div class="rbow-columnHeader" ng-style="rbowColumnHeader">
                 <div ng-repeat="columnHeaderItem in tableModel.columnHeader" class="rbow-box2 rbow-columnHeaderBox" ng-style="rbowColumnHeaderBox" id="{{$index}}">
                     <div class="rbow-columnHeaderBoxContent" ng-style="rbowColumnHeaderBoxContent">
+                        
+                        <!--CONTENT-->
                         {{columnHeaderItem.carName}}
                         <img ng-src="{{columnHeaderItem.carImageUrl}}" class="container" ng-style="rbowColumnHeaderBoxContentImage"/>
+                        
                     </div>
                     <div class="rbow-columnHeaderBoxNav" ng-style="rbowColumnHeaderBoxNav">
                          <button type="button" class="btn btn-default btn-xs" ng-click="OnColumnReorderButtonClicked($index, 'left')" ng-show="$index > 0">
@@ -36,7 +39,10 @@
             <div class="rbow-rowHeader" ng-style="rbowRowHeader">
                 <div ng-repeat="rowHeaderItem in tableModel.rowHeader" class="rbow-box2 rbow-rowHeaderBox" ng-style="rbowRowHeaderBox" id="{{$index}}">
                     <div class="rbow-rowHeaderBoxContent" ng-style="rbowRowHeaderBoxContent">
+                        
+                        <!--CONTENT-->
                         {{rowHeaderItem.specName}}
+                        
                     </div>
                     <div class="rbow-rowHeaderBoxNav" ng-style="rbowRowHeaderBoxNav">
                         <button type="button" class="btn btn-default btn-xs" ng-click="OnRowReorderButtonClicked($index, 'up')" ng-show="$index > 0">
@@ -56,7 +62,10 @@
             <div class="rbow-specsArea" ng-style="rbowSpecsArea">
                 <div ng-repeat="carSpecs in tableModel.specsData" class="rbow-specsColumn" ng-style="rbowSpecsColumn" id="{{$index}}">
                     <div ng-repeat="spec in carSpecs" class="rbow-box2 rbow-specsContent" ng-style="rbowSpecsContent" id="{{$index}}">
+                        
+                        <!--CONTENT-->
                         {{spec.value}} {{spec.unit}}
+                        
                     </div>
                 </div>
             </div>
