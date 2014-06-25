@@ -20,7 +20,7 @@
                 <div ng-repeat="columnHeaderItem in tableModel.columnHeader" class="rbow-box2 rbow-columnHeaderBox" ng-style="rbowColumnHeaderBox" id="{{$index}}">
                     <div class="rbow-columnHeaderBoxContent" ng-style="rbowColumnHeaderBoxContent">
                         
-                        <!--CONTENT-->
+                        <!--COLUMN HEADER CONTENT-->
                         {{columnHeaderItem.carName}}
                         <img ng-src="{{columnHeaderItem.carImageUrl}}" class="container" ng-style="rbowColumnHeaderBoxContentImage"/>
                         
@@ -40,7 +40,7 @@
                 <div ng-repeat="rowHeaderItem in tableModel.rowHeader" class="rbow-box2 rbow-rowHeaderBox" ng-style="rbowRowHeaderBox" id="{{$index}}">
                     <div class="rbow-rowHeaderBoxContent" ng-style="rbowRowHeaderBoxContent">
                         
-                        <!--CONTENT-->
+                        <!--ROW HEADER CONTENT-->
                         {{rowHeaderItem.specName}}
                         
                     </div>
@@ -63,7 +63,7 @@
                 <div ng-repeat="carSpecs in tableModel.specsData" class="rbow-specsColumn" ng-style="rbowSpecsColumn" id="{{$index}}">
                     <div ng-repeat="spec in carSpecs" class="rbow-box2 rbow-specsContent" ng-style="rbowSpecsContent" id="{{$index}}">
                         
-                        <!--CONTENT-->
+                        <!--CELLS CONTENT-->
                         {{spec.value}} {{spec.unit}}
                         
                     </div>
