@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 17, 2014, 12:50:48 PM
+    Author     : jpkader
+*/
+
+.rbow-bsRow {
+    background-color: yellow;
+}
+
+.rbow-bsContainer {
+    width: 80%;
+    background-color: orange;
+    overflow: scroll;
+}
+
+.rbow-box2 {
+    float:left;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: 1px solid black;
+    overflow: scroll;
+}
+
