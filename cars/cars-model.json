@@ -1,0 +1,79 @@
+{
+  "cars": [
+    {
+      "id": "mclaren-p1",
+      "name": "Mclaren P1",
+      "imageUrl": "img/cars/mclaren-p1.jpg",
+      "specs": [
+        {
+          "id": "horse-power",
+          "name": "Horse Power",
+          "value": 890,
+          "unit": "HP"
+        },
+        {
+          "id": "top-speed",
+          "name": "Top Speed",
+          "value": 349,
+          "unit": "km/h"
+        },
+        {
+          "id": "price",
+          "name": "Price",
+          "value": 1150000,
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "id": "ferrari-528-italia",
+      "name": "Ferrari 528 Italia",
+      "imageUrl": "img/cars/Ferrari-458-Italia.jpg",
+      "specs": [
+        {
+          "id": "horse-power",
+          "name": "Horse Power",
+          "value": 528,
+          "unit": "HP"
+        },
+        {
+          "id": "top-speed",
+          "name": "Top Speed",
+          "value": 310,
+          "unit": "km/h"
+        },
+        {
+          "id": "price",
+          "name": "Price",
+          "value": 229825,
+          "unit": "USD"
+        }
+      ]
+    },
+    {
+      "id": "bugati-veyron-supersport",
+      "name": "Bugati Veyron Supersport",
+      "imageUrl": "img/cars/bugati-veyron-supersport.jpg",
+      "specs": [
+        {
+          "id": "horse-power",
+          "name": "Horse Power",
+          "value": 1200,
+          "unit": "HP"
+        },
+        {
+          "id": "top-speed",
+          "name": "Top Speed",
+          "value": 430.982,
+          "unit": "km/h"
+        },
+        {
+          "id": "price",
+          "name": "Price",
+          "value": 2426904,
+          "unit": "USD"
+        }
+      ]
+    }
+  ]
+}

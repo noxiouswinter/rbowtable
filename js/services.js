@@ -10,7 +10,7 @@ var services = angular.module('myApp.services', ['ngResource']);
 services.factory('Car', ['$resource',
   function($resource){
     return $resource('cars/:carId.json', {}, {
-      query: {method:'GET', params:{carId:'cars'}, isArray:true}
+      getAll: {method:'GET', params:{carId:'cars-model'}, isArray:false}
     });
   }]);
 
