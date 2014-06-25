@@ -284,7 +284,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
 
             //Row Header
             var rowHeaderBoxWidth = 150;
-            var rowHeaderBoxHeight = 100;
+            var rowHeaderBoxHeight = 70;
             var rowHeaderBoxContentWidth = 123;
             var rowHeaderBoxContentHeight = rowHeaderBoxHeight;
             var rowHeaderBoxNavWidth = rowHeaderBoxWidth - rowHeaderBoxContentWidth - 2; //Tweak
@@ -293,10 +293,10 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             var rowHeaderHeight = (rowHeaderBoxHeight + padding) * numberOfRows;
 
             //Column Header
-            var columnHeaderBoxWidth = 180;
-            var columnHeaderBoxHeight = 150;
+            var columnHeaderBoxWidth = 200;
+            var columnHeaderBoxHeight = 175;
             var columnHeaderBoxContentWidth = columnHeaderBoxWidth;
-            var columnHeaderBoxContentHeight = 125;
+            var columnHeaderBoxContentHeight = 150;
             var columnHeaderBoxContentImageWidth = columnHeaderBoxContentWidth;
             var columnHeaderBoxContentImageHeight = columnHeaderBoxContentHeight;
             var columnHeaderBoxNavWidth = columnHeaderBoxWidth;
