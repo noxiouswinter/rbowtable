@@ -6,8 +6,12 @@
   </li>
 </ul>-->
 
+<h1>Car-iom</h1>
+
 <div class="rbow-bsRow row">
     <div class="rbow-bsContainer container">
+        <h2>Table</h2>
+        
         <div class="rbow-table container" ng-style="rbowTable">
             
             <div class="rbow-headNode" ng-style="rbowHeadNode">
@@ -26,12 +30,8 @@
                         
                     </div>
                     <div class="rbow-columnHeaderBoxNav" ng-style="rbowColumnHeaderBoxNav">
-                         <button type="button" class="btn btn-default btn-xs" ng-click="OnColumnReorderButtonClicked($index, 'left')" ng-show="$index > 0">
-                            <span class="glyphicon glyphicon-arrow-left"></span>
-                         </button>
-                        <button type="button" class="btn btn-default btn-xs" ng-click="OnColumnReorderButtonClicked($index, 'right')" ng-show="$index < tableModel.columnHeader.length - 1">
-                            <span class="glyphicon glyphicon-arrow-right"></span>
-                        </button>
+                        <span class="glyphicon glyphicon-arrow-left" ng-click="OnColumnReorderButtonClicked($index, 'left')" ng-show="$index > 0"></span>
+                        <span class="glyphicon glyphicon-arrow-right"ng-click="OnColumnReorderButtonClicked($index, 'right')" ng-show="$index < tableModel.columnHeader.length - 1"></span>
                     </div>
                 </div>
             </div>
@@ -45,15 +45,9 @@
                         
                     </div>
                     <div class="rbow-rowHeaderBoxNav" ng-style="rbowRowHeaderBoxNav">
-                        <button type="button" class="btn btn-default btn-xs" ng-click="OnRowReorderButtonClicked($index, 'up')" ng-show="$index > 0">
-                            <span class="glyphicon glyphicon-arrow-up"></span>
-                         </button>
-                        <button type="button" class="btn btn-default btn-xs" ng-click="OnSortBySpecButtonClicked($index)" >
-                            <span class="glyphicon glyphicon-sort rotate-icon"></span>
-                         </button>
-                        <button type="button" class="btn btn-default btn-xs" ng-click="OnRowReorderButtonClicked($index, 'down')" ng-show="$index < tableModel.rowHeader.length - 1">
-                            <span class="glyphicon glyphicon-arrow-down"></span>
-                         </button>
+                            <span class="glyphicon glyphicon-arrow-up" ng-click="OnRowReorderButtonClicked($index, 'up')" ng-show="$index > 0"></span>
+                            <span class="glyphicon glyphicon-sort rotate-icon" ng-click="OnSortBySpecButtonClicked($index)"></span>
+                            <span class="glyphicon glyphicon-arrow-down" ng-click="OnRowReorderButtonClicked($index, 'down')" ng-show="$index < tableModel.rowHeader.length - 1"></span>
                     </div>
                     
                 </div>
@@ -72,7 +66,12 @@
             
         </div>
         
+        <h2> Applied Table Model </h2>
+        <pre ng-bind="carsModelJsonDisplay | json" class="json-view container"></pre>
+        <h2>Table Model Input <small><p> Keep the ids Unique</p></small></h2>
+        <textarea class="form-control container json-input " rows="10" ng-model="carsModelInput"></textarea>
         <button class="btn btn-default" ng-click="loadData()">Load Json Data</button>
+        
     </div>
 </div>
 

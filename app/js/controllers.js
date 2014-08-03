@@ -10,18 +10,113 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
         var cachedCarsModel = null;
         var sortOrderToggle = true;
         
+        var defaultCarsModel = {
+
+            "cars": [
+                {
+                    "id": "mclaren-p1",
+                    "name": "Mclaren P1",
+                    "imageUrl": "img/cars/mclaren-p1.jpg",
+                    "specs": [
+                        {
+                            "id": "horse-power",
+                            "name": "Horse Power",
+                            "value": 890,
+                            "unit": "HP"
+                        },
+                        {
+                            "id": "top-speed",
+                            "name": "Top Speed",
+                            "value": 349,
+                            "unit": "km/h"
+                        },
+                        {
+                            "id": "price",
+                            "name": "Price",
+                            "value": 1150000,
+                            "unit": "USD"
+                        }
+                    ]
+                },
+                {
+                    "id": "ferrari-528-italia",
+                    "name": "Ferrari 528 Italia",
+                    "imageUrl": "img/cars/Ferrari-458-Italia.jpg",
+                    "specs": [
+                        {
+                            "id": "horse-power",
+                            "name": "Horse Power",
+                            "value": 528,
+                            "unit": "HP"
+                        },
+                        {
+                            "id": "top-speed",
+                            "name": "Top Speed",
+                            "value": 310,
+                            "unit": "km/h"
+                        },
+                        {
+                            "id": "price",
+                            "name": "Price",
+                            "value": 229825,
+                            "unit": "USD"
+                        }
+                    ]
+                },
+                {
+                    "id": "bugati-veyron-supersport",
+                    "name": "Bugati Veyron Supersport",
+                    "imageUrl": "img/cars/bugati-veyron-supersport.jpg",
+                    "specs": [
+                        {
+                            "id": "horse-power",
+                            "name": "Horse Power",
+                            "value": 1200,
+                            "unit": "HP"
+                        },
+                        {
+                            "id": "top-speed",
+                            "name": "Top Speed",
+                            "value": 430.982,
+                            "unit": "km/h"
+                        },
+                        {
+                            "id": "price",
+                            "name": "Price",
+                            "value": 2426904,
+                            "unit": "USD"
+                        }
+                    ]
+                }
+            ]
+        };
+        
+        
         $scope.loadData = function() {
-            Car.getAll(function(carsModel) {
-            cachedCarsModel = carsModel;
+            
+            if(cachedCarsModel == null){
+                cachedCarsModel = defaultCarsModel;
+            } else if($scope.carsModelInput != null) {
+                cachedCarsModel = angular.fromJson($scope.carsModelInput);
+            }
+            
             $scope.tableModel = getDefaultTableModel(cachedCarsModel);
             //Refresh Positions
             positionElements();
-         });
+            
+            $scope.carsModelJsonDisplay = cachedCarsModel;
+            
+//            Car.getAll(function(carsModel) {
+//                cachedCarsModel = carsModel;
+//                $scope.tableModel = getDefaultTableModel(cachedCarsModel);
+//                //Refresh Positions
+//                positionElements();
+//            });
         };
         
         $scope.loadData();
          
-        var getDefaultTableModel = function(carsModel) {
+        function getDefaultTableModel(carsModel) {
 
            var tempTableModel = {"columnHeaderIds": [], "rowHeaderIds": [], "columnHeader" : [], "rowHeader" : [], "specsData": []};
 
@@ -33,7 +128,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
            return tempTableModel;
         }
 
-        var copyHeaderIds = function(tableModel, carsModel) {
+        function copyHeaderIds(tableModel, carsModel) {
 
            //Get the cars array
            var cars = carsModel.cars;
@@ -54,7 +149,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
            }
         };
 
-        var populateColumnHeaderDataOrderedByColumnHeaderIds = function(tableModel, carsModel) {
+        function populateColumnHeaderDataOrderedByColumnHeaderIds(tableModel, carsModel) {
 
             //Reset array
             tableModel.columnHeader = [];
@@ -78,7 +173,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
            }
         };
 
-        var populateRowHeaderDataOrderedByRowHeaderIds = function(tableModel, carsModel) {
+        function populateRowHeaderDataOrderedByRowHeaderIds(tableModel, carsModel) {
 
             //Reset array
             tableModel.rowHeader = [];
@@ -105,7 +200,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
            }
         };
 
-        var populateSpecsDataOrderedByColumnHeaderIdsAndRowHeaderIds = function(tableModel, carsModel) {
+        function populateSpecsDataOrderedByColumnHeaderIdsAndRowHeaderIds(tableModel, carsModel) {
 
             //Get the cars array
            var cars = carsModel.cars;
@@ -138,7 +233,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
            tableModel.specsData = tempTableSpecsData;
         };
          
-        var getCarById = function(cars, carId) {
+        function getCarById(cars, carId) {
             var currentCar = null;
             for(var i = 0; i < cars.length; i++) {
                 var car = cars[i];
@@ -150,7 +245,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             return currentCar;
          };
          
-         var getSpecById = function(specs, specId) {
+         function getSpecById(specs, specId) {
             var currentSpec = null;
             for(var i = 0; i < specs.length; i++) {
                 var spec = specs[i];
@@ -255,7 +350,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             populateSpecsDataOrderedByColumnHeaderIdsAndRowHeaderIds($scope.tableModel, cachedCarsModel);
         };
         
-        var shiftIndex = function(array, index, towardsOrAwayFromZero) {
+        function shiftIndex(array, index, towardsOrAwayFromZero) {
             
             if( towardsOrAwayFromZero == 'towards' && index > 0) {
                 var indexValue = array[index];
@@ -270,10 +365,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             }
         };
         
-        
-        
-        
-        var positionElements = function() {
+        function positionElements() {
 
             var Unit = 'px';
         
@@ -285,7 +377,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             //Row Header
             var rowHeaderBoxWidth = 150;
             var rowHeaderBoxHeight = 70;
-            var rowHeaderBoxContentWidth = 123;
+            var rowHeaderBoxContentWidth = 130;
             var rowHeaderBoxContentHeight = rowHeaderBoxHeight;
             var rowHeaderBoxNavWidth = rowHeaderBoxWidth - rowHeaderBoxContentWidth - 2; //Tweak
             var rowHeaderBoxNavHeight = rowHeaderBoxHeight;
@@ -296,7 +388,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
             var columnHeaderBoxWidth = 200;
             var columnHeaderBoxHeight = 175;
             var columnHeaderBoxContentWidth = columnHeaderBoxWidth;
-            var columnHeaderBoxContentHeight = 150;
+            var columnHeaderBoxContentHeight = 155;
             var columnHeaderBoxContentImageWidth = columnHeaderBoxContentWidth;
             var columnHeaderBoxContentImageHeight = columnHeaderBoxContentHeight;
             var columnHeaderBoxNavWidth = columnHeaderBoxWidth;
@@ -349,6 +441,11 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'position': 'relative',
                 'width': tableWidth+Unit,
                 'height': tableHeight+Unit,
+                
+                '-moz-border-radius': '3px',
+                '-webkit-border-radius': '3px',
+                'border-radius': '3px',
+                
                 'background-color': 'white',
                 'border': '1px solid lightgrey',
                 'overflow': 'scroll'

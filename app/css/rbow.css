@@ -14,6 +14,8 @@ and open the template in the editor.
 
 .rbow-bsContainer {
     width: 80%;
+    margin-top: 100px;
+    padding: 50px;
     background-color: white;
     overflow: scroll;
 }
@@ -24,9 +26,31 @@ and open the template in the editor.
     margin-left: 10px;
     border-top: 1px solid black;
     border-left: 1px solid black;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
     border-bottom: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
 }
+
+.rbow-table {
+    margin-top: 50px;
+}
+
+.json-view, .json-input {
+    width: 80%;
+    max-height: 300px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    overflow: scroll;
+}
+
+/*.json-input {
+    width: 20%;
+    max-height: 200px;
+    margin-top: 50px;
+    overflow: scroll;
+}*/
 
 /* Utils */
 .rotate-icon    {  
