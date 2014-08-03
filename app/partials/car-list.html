@@ -1,77 +1,71 @@
-<!--<ul>
-  <li ng-repeat="car in cars">
-    <p><a href="#/cars/{{car.id}}"><img ng-src="{{car.imageUrl}}"></a></p>
-    <p><a href="#/cars/{{car.id}}">{{car.name}}</a></p>
-    <p>{{car.snippet}}</p>
-  </li>
-</ul>-->
 
-<h1>Car-iom</h1>
+<div class="container">
 
-<div class="rbow-bsRow row">
-    <div class="rbow-bsContainer container">
-        <h2>Table</h2>
+    <h1>RbowTable</h1>
+
+    <div class="container rbow-table">
         
-        <div class="rbow-table container" ng-style="rbowTable">
-            
-            <div class="rbow-headNode" ng-style="rbowHeadNode">
-                <div class="rbow-box2 rbow-headNodeBox" ng-style="rbowHeadNodeBox">
-                    <div class="rbow-headNodeBoxContent" ng-style="rbowHeadNodeBoxContent"></div>
-                </div>
-            </div>
+    <div ng-style="rbowTable">
 
-            <div class="rbow-columnHeader" ng-style="rbowColumnHeader">
-                <div ng-repeat="columnHeaderItem in tableModel.columnHeader" class="rbow-box2 rbow-columnHeaderBox" ng-style="rbowColumnHeaderBox" id="{{$index}}">
-                    <div class="rbow-columnHeaderBoxContent" ng-style="rbowColumnHeaderBoxContent">
-                        
-                        <!--COLUMN HEADER CONTENT-->
-                        {{columnHeaderItem.carName}}
-                        <img ng-src="{{columnHeaderItem.carImageUrl}}" class="container" ng-style="rbowColumnHeaderBoxContentImage"/>
-                        
-                    </div>
-                    <div class="rbow-columnHeaderBoxNav" ng-style="rbowColumnHeaderBoxNav">
-                        <span class="glyphicon glyphicon-arrow-left" ng-click="OnColumnReorderButtonClicked($index, 'left')" ng-show="$index > 0"></span>
-                        <span class="glyphicon glyphicon-arrow-right"ng-click="OnColumnReorderButtonClicked($index, 'right')" ng-show="$index < tableModel.columnHeader.length - 1"></span>
-                    </div>
-                </div>
+        <div class="rbow-headNode" ng-style="rbowHeadNode">
+            <div class="rbow-box2 rbow-headNodeBox" ng-style="rbowHeadNodeBox">
+                <div class="rbow-headNodeBoxContent" ng-style="rbowHeadNodeBoxContent"></div>
             </div>
-
-            <div class="rbow-rowHeader" ng-style="rbowRowHeader">
-                <div ng-repeat="rowHeaderItem in tableModel.rowHeader" class="rbow-box2 rbow-rowHeaderBox" ng-style="rbowRowHeaderBox" id="{{$index}}">
-                    <div class="rbow-rowHeaderBoxContent" ng-style="rbowRowHeaderBoxContent">
-                        
-                        <!--ROW HEADER CONTENT-->
-                        {{rowHeaderItem.specName}}
-                        
-                    </div>
-                    <div class="rbow-rowHeaderBoxNav" ng-style="rbowRowHeaderBoxNav">
-                            <span class="glyphicon glyphicon-arrow-up" ng-click="OnRowReorderButtonClicked($index, 'up')" ng-show="$index > 0"></span>
-                            <span class="glyphicon glyphicon-sort rotate-icon" ng-click="OnSortBySpecButtonClicked($index)"></span>
-                            <span class="glyphicon glyphicon-arrow-down" ng-click="OnRowReorderButtonClicked($index, 'down')" ng-show="$index < tableModel.rowHeader.length - 1"></span>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="rbow-specsArea" ng-style="rbowSpecsArea">
-                <div ng-repeat="carSpecs in tableModel.specsData" class="rbow-specsColumn" ng-style="rbowSpecsColumn" id="{{$index}}">
-                    <div ng-repeat="spec in carSpecs" class="rbow-box2 rbow-specsContent" ng-style="rbowSpecsContent" id="{{$index}}">
-                        
-                        <!--CELLS CONTENT-->
-                        {{spec.value}} {{spec.unit}}
-                        
-                    </div>
-                </div>
-            </div>
-            
         </div>
-        
-        <h2> Applied Table Model </h2>
-        <pre ng-bind="carsModelJsonDisplay | json" class="json-view container"></pre>
-        <h2>Table Model Input <small><p> Keep the ids Unique</p></small></h2>
-        <textarea class="form-control container json-input " rows="10" ng-model="carsModelInput"></textarea>
-        <button class="btn btn-default" ng-click="loadData()">Load Json Data</button>
+
+        <div class="rbow-columnHeader" ng-style="rbowColumnHeader">
+            <div ng-repeat="columnHeaderItem in tableModel.columnHeader" class="rbow-box2 rbow-columnHeaderBox" ng-style="rbowColumnHeaderBox" id="{{$index}}">
+                <div class="rbow-columnHeaderBoxContent" ng-style="rbowColumnHeaderBoxContent">
+
+                    <!--COLUMN HEADER CONTENT-->
+                    {{columnHeaderItem.carName}}
+                    <img ng-src="{{columnHeaderItem.carImageUrl}}" class="container" ng-style="rbowColumnHeaderBoxContentImage"/>
+
+                </div>
+                <div class="rbow-columnHeaderBoxNav" ng-style="rbowColumnHeaderBoxNav">
+                    <span class="glyphicon glyphicon-arrow-left" ng-click="OnColumnReorderButtonClicked($index, 'left')" ng-show="$index > 0"></span>
+                    <span class="glyphicon glyphicon-arrow-right"ng-click="OnColumnReorderButtonClicked($index, 'right')" ng-show="$index < tableModel.columnHeader.length - 1"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="rbow-rowHeader" ng-style="rbowRowHeader">
+            <div ng-repeat="rowHeaderItem in tableModel.rowHeader" class="rbow-box2 rbow-rowHeaderBox" ng-style="rbowRowHeaderBox" id="{{$index}}">
+                <div class="rbow-rowHeaderBoxContent" ng-style="rbowRowHeaderBoxContent">
+
+                    <!--ROW HEADER CONTENT-->
+                    {{rowHeaderItem.specName}}
+
+                </div>
+                <div class="rbow-rowHeaderBoxNav" ng-style="rbowRowHeaderBoxNav">
+                    <span class="glyphicon glyphicon-arrow-up" ng-click="OnRowReorderButtonClicked($index, 'up')" ng-show="$index > 0"></span>
+                    <span class="glyphicon glyphicon-sort rotate-icon" ng-click="OnSortBySpecButtonClicked($index)"></span>
+                    <span class="glyphicon glyphicon-arrow-down" ng-click="OnRowReorderButtonClicked($index, 'down')" ng-show="$index < tableModel.rowHeader.length - 1"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="rbow-specsArea" ng-style="rbowSpecsArea">
+            <div ng-repeat="carSpecs in tableModel.specsData" class="rbow-specsColumn" ng-style="rbowSpecsColumn" id="{{$index}}">
+                <div ng-repeat="spec in carSpecs" class="rbow-box2 rbow-specsContent" ng-style="rbowSpecsContent" id="{{$index}}">
+
+                    <!--CELLS CONTENT-->
+                    {{spec.value}} {{spec.unit}}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
         
     </div>
+
+    <h2> Applied Table Model </h2>
+    <pre ng-bind="carsModelJsonDisplay | json" class="json-view"></pre>
+    <h2>Table Model Input <small><p> Keep the ids Unique</p></small></h2>
+    <textarea class="form-control json-input " rows="10" ng-model="carsModelInput"></textarea>
+    <button class="btn btn-default" ng-click="loadData()">Load Json Data</button>
 </div>
+
 

@@ -8,15 +8,8 @@ and open the template in the editor.
     Author     : jpkader
 */
 
-.rbow-bsRow {
-    background-color: #baf1e3;
-}
-
-.rbow-bsContainer {
-    width: 80%;
-    margin-top: 100px;
-    padding: 50px;
-    background-color: white;
+.rbow-table {
+    /*width: 80%;*/
     overflow: scroll;
 }
 
@@ -33,24 +26,13 @@ and open the template in the editor.
     border-right: 1px solid lightgrey;
 }
 
-.rbow-table {
-    margin-top: 50px;
-}
-
 .json-view, .json-input {
-    width: 80%;
+/*    width: 80%;*/
     max-height: 300px;
     margin-top: 50px;
     margin-bottom: 50px;
     overflow: scroll;
 }
-
-/*.json-input {
-    width: 20%;
-    max-height: 200px;
-    margin-top: 50px;
-    overflow: scroll;
-}*/
 
 /* Utils */
 .rotate-icon    {  

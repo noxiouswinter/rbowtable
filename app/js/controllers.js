@@ -447,8 +447,7 @@ controllers.controller('CarListController', ['$scope', 'Car', function($scope, C
                 'border-radius': '3px',
                 
                 'background-color': 'white',
-                'border': '1px solid lightgrey',
-                'overflow': 'scroll'
+                'border': '1px solid lightgrey'
             };
 
             $scope.rbowHeadNode = {
